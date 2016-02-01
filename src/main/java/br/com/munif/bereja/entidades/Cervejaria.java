@@ -6,11 +6,13 @@
 package br.com.munif.bereja.entidades;
 
 import br.com.munif.bereja.entidades.util.SuperEntidade;
+import javax.persistence.Entity;
 
 /**
  *
  * @author munif
  */
+@Entity
 public class Cervejaria extends SuperEntidade {
 
     private String nome;
