@@ -25,9 +25,15 @@ public class SuperEntidade implements Serializable{
     @Id
     private Long id;
     private Cervejaria cervejaria;
+    
+    private static long lastid=0;
 
     public SuperEntidade() {
-        id=System.currentTimeMillis()*1000+(long)(Math.random()*1000);
+        id=System.currentTimeMillis()*1000;
+        if (id==lastid){
+            id++;
+        }
+        lastid=id;
     }
     
     public Long getId() {

@@ -5,6 +5,8 @@
  */
 package br.com.munif.bereja.teste;
 
+import br.com.munif.bereja.entidades.Usuario;
+import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 
 /**
@@ -15,8 +17,13 @@ public class Teste {
     
     public static void main(String ... args){
         
-        Persistence.createEntityManagerFactory("berejaPU").createEntityManager();
-
+        EntityManager em = Persistence.createEntityManagerFactory("berejaPU").createEntityManager();
+        for (int i=0;i<100;i++){
+            Usuario usu=new Usuario();
+            usu.setNome(""+i);
+            em.persist(usu);
+        }
+        em.close();
     }
     
 }
