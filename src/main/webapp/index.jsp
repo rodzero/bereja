@@ -13,7 +13,12 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+<<<<<<< HEAD
         <a href="usuario/controlador">Usuarios</a> <br>
         <a href="cervejaria/controlador">Cervejaria</a>
+=======
+        <a href="usuario/controlador">Usuarios</a> <br/>
+        <a href="qualificacao/controlador">Qualificacoes</a>
+>>>>>>> 02194ce1bccdf4039f07602457d32a0d7d66a8c9
     </body>
 </html>
