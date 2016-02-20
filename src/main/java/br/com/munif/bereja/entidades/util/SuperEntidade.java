@@ -21,25 +21,29 @@ import javax.persistence.MappedSuperclass;
  * @author munif
  */
 @MappedSuperclass
-public class SuperEntidade implements Serializable{
+public class SuperEntidade implements Serializable {
 
     @Id
     private Long id;
     @ManyToOne
     private Cervejaria cervejaria;
-    
-    private static long lastid=0;
+
+    private static long lastid = 0;
 
     public SuperEntidade() {
-        id=System.currentTimeMillis()*1000;
-        if (id==lastid){
+        id = System.currentTimeMillis() * 1000;
+        if (id == lastid) {
             id++;
         }
-        lastid=id;
+        lastid = id;
     }
-    
+
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Cervejaria getCervejaria() {

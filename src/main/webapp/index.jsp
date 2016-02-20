@@ -13,9 +13,6 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <%
-
-            javax.persistence.Persistence.createEntityManagerFactory("berejaPU").createEntityManager();
-        %>
+        <a href="usuario/controlador">Usuarios</a>
     </body>
 </html>

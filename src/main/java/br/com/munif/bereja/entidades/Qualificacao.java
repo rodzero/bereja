@@ -27,11 +27,13 @@ public class Qualificacao extends SuperEntidade {
     @ManyToOne
     private Usuario usuario;
 
+    @ManyToOne
+    private Producao producao;
+  
+
     public Qualificacao() {
-        quando=new Date();
+        quando = new Date();
     }
-    
-    
 
     public Date getQuando() {
         return quando;
@@ -56,5 +58,15 @@ public class Qualificacao extends SuperEntidade {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public Producao getProducao() {
+        return producao;
+    }
+
+    public void setProducao(Producao producao) {
+        this.producao = producao;
+    }
+    
+    
 
 }
