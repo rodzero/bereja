@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <a href="usuario/controlador">Usuarios</a>
+        <a href="usuario/controlador">Usuarios</a> <br/>
+        <a href="qualificacao/controlador">Qualificacoes</a>
     </body>
 </html>
