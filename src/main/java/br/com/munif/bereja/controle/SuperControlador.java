@@ -11,6 +11,7 @@ import br.com.munif.bereja.negocio.UsuarioService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,6 +27,9 @@ import org.apache.jasper.runtime.JspRuntimeLibrary;
  * @author munif
  */
 public abstract class SuperControlador extends HttpServlet {
+    
+    protected SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

@@ -9,16 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Bereja</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-<<<<<<< HEAD
+        <h1>Bereja</h1>
+
         <a href="usuario/controlador">Usuarios</a> <br>
         <a href="cervejaria/controlador">Cervejaria</a>
-=======
-        <a href="usuario/controlador">Usuarios</a> <br/>
+        <a href="receita/controlador">Receita</a> <br/>
+        <a href="producao/controlador">Producao</a><br>
         <a href="qualificacao/controlador">Qualificacoes</a>
->>>>>>> 02194ce1bccdf4039f07602457d32a0d7d66a8c9
+
     </body>
 </html>

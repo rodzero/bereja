@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,21 +13,23 @@
         <title>Lista Qualificacoes</title>
     </head>
     <body style="font-family: sans-serif">
-        <h1>Cadastro de Qualificacoes</h1>
+        <h1>Cadastro de Produção</h1>
         <a href="controlador?acao=criar">Novo</a>
         <table border="1">
             <thead>
                 <tr>
+                    <th>Receita</th>
                     <th>Data</th>
-                    <th>Texto</th>
+                    <th>Quantidade</th>
         
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="${qualificacoes}" var="q">
+                <c:forEach items="${producoes}" var="q">
                     <tr>
-                        <td><f:formatDate value="${q.quando}" /></td>
-                        <td>${q.texto}</td>
+                        <td>${q.receita.nome}</td>
+                        <td>${q.quando}</td>
+                        <td>${q.quantidade}</td>
                         
                         
                         <td>

@@ -7,8 +7,10 @@ package br.com.munif.bereja.entidades;
 
 import br.com.munif.bereja.entidades.util.SuperEntidade;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,9 +30,20 @@ public class Producao extends SuperEntidade {
 
     @ManyToOne
     private Receita receita;
+    
+    @OneToMany(mappedBy = "producao")
+    private List<Qualificacao> qualificacoes;
 
     public Producao() {
         quando=new Date();
+    }
+
+    public List<Qualificacao> getQualificacoes() {
+        return qualificacoes;
+    }
+
+    public void setQualificacoes(List<Qualificacao> qualificacoes) {
+        this.qualificacoes = qualificacoes;
     }
 
     public Receita getReceita() {
