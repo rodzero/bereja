@@ -1,25 +1,27 @@
 package br.com.munif.bereja.negocio;
 
 import br.com.munif.bereja.entidades.Usuario;
-import br.com.munif.bereja.repositorio.UsuarioRepositorio;
+import br.com.munif.bereja.repositorio.Repositorio;
 import java.util.List;
 
 public class UsuarioService {
     
+    public static Repositorio<Usuario> repositorio=new Repositorio<>(Usuario.class);
+    
     public static List<Usuario> listaUsuarios(){
-        return UsuarioRepositorio.consultaUsuarios();
+        return repositorio.consulta();
     }
 
     public static void excluir(Long id) {
-        Usuario usuario = UsuarioRepositorio.consultaUsuario(id);
+        Usuario usuario = repositorio.consulta(id);
         if (usuario==null){
             throw new RuntimeException("Usuário não existe");
         }
-        UsuarioRepositorio.excluir(usuario);
+        repositorio.excluir(usuario);
     }
 
     public static Usuario recuperar(Long id) {
-        Usuario usuario = UsuarioRepositorio.consultaUsuario(id);
+        Usuario usuario = repositorio.consulta(id);
         if (usuario==null){
             throw new RuntimeException("Usuário não existe");
         }
@@ -27,7 +29,7 @@ public class UsuarioService {
     }
 
     public static void salvar(Usuario usu) {
-        UsuarioRepositorio.salvar(usu);
+        repositorio.salvar(usu);
     }
     
 }

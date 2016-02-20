@@ -5,6 +5,8 @@
  */
 package br.com.munif.bereja.entidades.util;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -17,7 +19,7 @@ public class Persistencia {
 
     private static Persistencia instancia = new Persistencia();
 
-    public ThreadLocal<EntityManager> tlem=new ThreadLocal<>();
+    public ThreadLocal<EntityManager> tlem = new ThreadLocal<>();
 
     public static Persistencia getInstancia() {
         return instancia;
@@ -29,11 +31,12 @@ public class Persistencia {
     }
 
     public EntityManager getEntityManager() {
-        if (tlem.get()==null){
+        if (tlem.get() == null) {
             tlem.set(emf.createEntityManager());
         }
         return tlem.get();
     }
+
     public void destroyEntityManager() {
         tlem.get().close();
         tlem.remove();
@@ -43,6 +46,30 @@ public class Persistencia {
     protected void finalize() throws Throwable {
         super.finalize();
         emf.close();
+    }
+
+    /**
+     * Infere o tipo genérico de uma classe, por exemplo, em uma lista,
+     * deseja-se saber o tipo que foi utilizado na lista.
+     *
+     * @param clazz Classe
+     * @return Tipo genérico
+     */
+    public static Class<?> inferGenericType(Class<?> clazz) {
+        return inferGenericType(clazz, 0);
+    }
+
+    /**
+     * Infere um dos tipos genérico de uma classe, por exemplo, em um mapa,
+     * deseja-se saber um dos dois tipos que foi utilizado no mapa.
+     *
+     * @param clazz Classe
+     * @param index posição do tipo
+     * @return Tipo genérico
+     */
+    public static Class<?> inferGenericType(Class<?> clazz, int index) {
+        Type superClass = clazz.getGenericSuperclass();
+        return (Class<?>) ((ParameterizedType) superClass).getActualTypeArguments()[index];
     }
 
 }

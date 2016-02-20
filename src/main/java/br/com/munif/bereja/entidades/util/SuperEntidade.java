@@ -81,4 +81,8 @@ public class SuperEntidade implements Serializable {
         return this.getClass().getSimpleName() + "{" + "id=" + id + ", cervejaria=" + cervejaria + '}';
     }
 
+    public Class getClazz() {
+        return this.getClass();
+    }
+
 }
