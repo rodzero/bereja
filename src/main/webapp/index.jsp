@@ -1,9 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 30/01/2016, 16:37:08
-    Author     : munif
---%>
-
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,14 +6,17 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bereja</title>
     </head>
-    <body>
-        <h1>Bereja</h1>
-
-        <a href="usuario/controlador">Usuarios</a> <br>
-        <a href="cervejaria/controlador">Cervejaria</a>
-        <a href="receita/controlador">Receita</a> <br/>
-        <a href="producao/controlador">Producao</a><br>
-        <a href="qualificacao/controlador">Qualificacoes</a>
-
-    </body>
+ <body>
+    <div id="wrapper">
+        <jsp:include page="menu.jsp"></jsp:include>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <h1 style="text-align: center">Bem vindo ao sistema de fábrica de cerveja</h1> <br>
+                    <img src="resource/copoesdecerveja.jpg" width="700px">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
 </html>
