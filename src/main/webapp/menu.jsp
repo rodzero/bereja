@@ -14,10 +14,12 @@
     <li class="sidebar-brand">
       <h3><a>Bereja</a></h3>
     </li>
-    <li><a href="../index.jsp" >Home</a></li>
-    <li><a href="../usuario/controlador" >Usuarios</a></li>
-    <li><a href="../cervejaria/controlador" >Cervejaria</a></li>
-    <li><a href="../receita/controlador">Receita</a></li>
+    <li><a href="index.jsp" >Home</a></li>
+    <li><a href="usuario/controlador" >Usuarios</a></li>
+    <li><a href="cervejaria/controlador" >Cervejaria</a></li>
+    <li><a href="receita/controlador">Receita</a></li>
+    <li><a href="producao/controlador">Produção</a></li>
+    <li><a href="qualificacao/controlador">Qualificação</a></li>
   </ul>
 </div>
 </body>
