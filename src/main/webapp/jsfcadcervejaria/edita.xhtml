@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/modelo.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="topo"><p:messages id="msgs" showDetail="false" /></ui:define>
+    <ui:define name="corpo">
+        <h:form id="formulario">
+            <p:panelGrid style="margin-top:20px">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="6">Editando Cervejaria</p:column>      
+                    </p:row>
+                </f:facet><p:row>
+                    <p:column><h:outputText value="Nome:*"/></p:column>
+                    <p:column colspan="5">
+                        <p:inputText id="nome" size="50"  value="#{jSFCevejariaControlador.entidade.nome}" required="true" requiredMessage="Nome é obrigatório"/>
+                        <p:message for="nome" showDetail="true" />
+                    </p:column>
+                </p:row>
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="6" style="text-align: right">
+                            <p:commandButton actionListener="#{jSFCevejariaControlador.salvar()}" action="lista" update="msgs" ajax="false" value="Salvar"/> 
+                            <p:spacer width="20"/>
+                            <p:commandButton actionListener="#{jSFCevejariaControlador.cancelar()}" action="lista" update="msgs" ajax="false" value="Cancelar" immediate="true"/> 
+                        </p:column>
+                    </p:row>
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

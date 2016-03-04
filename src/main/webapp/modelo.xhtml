@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Bereja - munif.com.br</title>
+    </h:head>
+    <h:body style="font-size: 12px">
+        <h:form id="formularioMenu">
+            <div id="menu">
+                <ui:insert id="men" name="menu">
+                    <p:menubar>  
+                        <p:menuitem value="Principal" url="/faces/index.xhtml" icon="ui-icon-home" />  
+                        <p:submenu label="Cadastros" icon="ui-icon-document">  
+                            <p:menuitem value="Cervejaria" url="/faces/jsfcadcervejaria/lista.xhtml" />
+                        </p:submenu>  
+                        <p:menuitem value="Sair" url="/sair.jsp"  icon="ui-icon-close" />  
+                    </p:menubar>  
+                </ui:insert>
+            </div>
+        </h:form>
+        <div>
+            <div id="left">
+                <ui:insert name="left"> </ui:insert>
+            </div>
+            <div>
+                <div id="corpo">
+                    <ui:insert name="topo">
+                    </ui:insert>
+                    <ui:insert name="corpo">
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="Rodapé">
+            </ui:insert>
+        </div>
+    </h:body>
+</html>
