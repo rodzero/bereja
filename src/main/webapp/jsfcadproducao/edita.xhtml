@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" 
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                template="/modelo.xhtml"
+                xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="topo"><p:messages id="msgs" showDetail="false" /></ui:define>
+    <ui:define name="corpo">
+        <h:form id="formulario">
+            <p:panelGrid style="margin-top:20px">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="6">Editando Producao</p:column>      
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column><h:outputText value="Id:"/></p:column>
+                    <p:column colspan="5">
+                        <p:inputText id="id" size="50"  value="#{jSFProducaoControlador.entidade.id}" readonly="true" />
+
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column><h:outputText value="Histórico*"/></p:column>
+                    <p:column colspan="5">
+                        <p:inputText id="nome" size="50"  value="#{jSFProducaoControlador.entidade.historico}" required="true" requiredMessage="Nome é obrigatório"/>
+                        <p:message for="nome" showDetail="true" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column><h:outputText value="Data*"/></p:column>
+                    <p:column colspan="5">
+                        <p:calendar id="quando" value="#{jSFProducaoControlador.entidade.quando}" showOn="button" required="true" />
+                        <p:message for="quando" showDetail="true" />
+                    </p:column>
+                </p:row>
+
+                <p:row>
+                    <p:column><h:outputText value="Receita"/></p:column>
+                    <p:column>
+<!--                        <p:selectOneMenu filter="true" id="receita" value="#{jSFProducaoControlador.entidade.receita}" converter="#{jSFReceitaControlador.converter}">
+                            <f:selectItems value="#{jSFReceitaControlador.lista}" itemLabel="#{obj.nome}" var="obj"/>
+                        </p:selectOneMenu>-->
+                        <p:autoComplete id="receita" 
+                                        value="#{jSFProducaoControlador.entidade.receita}" 
+                                        var="obj" 
+                                        itemLabel="#{obj.nome}" 
+                                        itemValue="#{obj}" 
+                                        converter="#{jSFReceitaControlador.converter}" 
+                                        forceSelection="true"
+                                        completeMethod="#{jSFReceitaControlador.filtrarPor}"
+                                        />
+                        
+                        
+                    </p:column>
+                </p:row>
+
+
+                <f:facet name="footer">
+                    <p:row>
+                        <p:column colspan="6" style="text-align: right">
+                            <p:commandButton actionListener="#{jSFProducaoControlador.salvar()}" action="lista" update="msgs" ajax="false" value="Salvar"/> 
+                            <p:spacer width="20"/>
+                            <p:commandButton actionListener="#{jSFProducaoControlador.cancelar()}" action="lista" update="msgs" ajax="false" value="Cancelar" immediate="true"/> 
+                        </p:column>
+                    </p:row>
+
+                </f:facet>
+            </p:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

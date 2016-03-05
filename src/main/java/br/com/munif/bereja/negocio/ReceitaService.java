@@ -8,6 +8,7 @@ package br.com.munif.bereja.negocio;
 import br.com.munif.bereja.entidades.Receita;
 import br.com.munif.bereja.repositorio.ReceitaRepositorio;
 import br.com.munif.bereja.repositorio.Repositorio;
+import java.util.List;
 
 public class ReceitaService extends Service<Receita>{
 
@@ -19,6 +20,11 @@ public class ReceitaService extends Service<Receita>{
     protected Repositorio<Receita> getRepositorio() {
         return new ReceitaRepositorio();
     }
+    
+    public List<Receita> filtra(String s){
+        return ((ReceitaRepositorio)repositorio).filtra(s);
+    }
+    
     
     
     

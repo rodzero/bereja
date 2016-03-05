@@ -10,6 +10,7 @@ import br.com.munif.bereja.entidades.util.Persistencia;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import javax.persistence.Query;
 
 public class ReceitaRepositorio extends Repositorio<Receita> {
 
@@ -21,6 +22,14 @@ public class ReceitaRepositorio extends Repositorio<Receita> {
     public List<Receita> consulta() {
         EntityManager em = Persistencia.getInstancia().getEntityManager();
         return em.createQuery("from Receita receita order by receita.nome").getResultList();
+    }
+
+    public List<Receita> filtra(String s) {
+        EntityManager em = Persistencia.getInstancia().getEntityManager();
+        Query query = em.createQuery("from Receita receita where receita.nome like :filtro order by receita.nome");
+        query.setParameter("filtro", s + '%');
+        query.setMaxResults(4);
+        return query.getResultList();
     }
 
 }

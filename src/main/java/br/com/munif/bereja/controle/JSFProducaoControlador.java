@@ -1,7 +1,7 @@
 package br.com.munif.bereja.controle;
 
-import br.com.munif.bereja.entidades.Cervejaria;
-import br.com.munif.bereja.negocio.CervejariaService;
+import br.com.munif.bereja.entidades.Producao;
+import br.com.munif.bereja.negocio.Service;
 import br.com.munif.util.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
@@ -15,17 +15,17 @@ import javax.faces.bean.SessionScoped;
  */
 @SessionScoped
 @ManagedBean
-public class JSFCevejariaControlador implements Serializable{
+public class JSFProducaoControlador implements Serializable{
     
-    private final CervejariaService service;
+    private final Service<Producao> service;
     
-    private Cervejaria entidade;
-    private List<Cervejaria> lista;
+    private Producao entidade;
+    private List<Producao> lista;
     private String filtro;
     private Boolean novo;
 
-    public JSFCevejariaControlador() {
-        this.service = new CervejariaService();
+    public JSFProducaoControlador() {
+        this.service = new Service<>(Producao.class);
     }
 
     public String getFiltro() {
@@ -36,32 +36,32 @@ public class JSFCevejariaControlador implements Serializable{
         this.filtro = filtro;
     }
 
-    public Cervejaria getEntidade() {
+    public Producao getEntidade() {
         return entidade;
     }
 
-    public void setEntidade(Cervejaria entidade) {
+    public void setEntidade(Producao entidade) {
         this.entidade = entidade;
         novo=false;
     }
 
-    public List<Cervejaria> getLista() {
+    public List<Producao> getLista() {
         if (lista == null) {
             lista = service.lista();
         }
         return lista;
     }
 
-    public void setLista(List<Cervejaria> lista) {
+    public void setLista(List<Producao> lista) {
         this.lista = lista;
     }
 
     public void novo() {
-        entidade = new Cervejaria();
+        entidade = new Producao();
         novo=true;
     }
     
-    public void excluir(Cervejaria aRemover) {
+    public void excluir(Producao aRemover) {
         service.excluir(aRemover.getId());
         FacesUtil.addMessageInfo("Informação", "O objeto foi excluído.");
         lista=null;

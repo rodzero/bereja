@@ -13,30 +13,46 @@
             <p:panelGrid style="margin-top:20px">
                 <f:facet name="header">
                     <p:row>
-                        <p:column colspan="6">Editando Cervejaria</p:column>      
+                        <p:column colspan="6">Editando Receita</p:column>      
                     </p:row>
                 </f:facet>
                 <p:row>
                     <p:column><h:outputText value="Id:"/></p:column>
                     <p:column colspan="5">
-                        <p:inputText id="id" size="50"  value="#{jSFCevejariaControlador.entidade.id}" readonly="true" />
-                        
+                        <p:inputText id="id" size="50"  value="#{jSFReceitaControlador.entidade.id}" readonly="true" />
+
                     </p:column>
                 </p:row>
 
                 <p:row>
                     <p:column><h:outputText value="Nome:*"/></p:column>
                     <p:column colspan="5">
-                        <p:inputText id="nome" size="50"  value="#{jSFCevejariaControlador.entidade.nome}" required="true" requiredMessage="Nome é obrigatório"/>
+                        <p:inputText id="nome" size="50"  value="#{jSFReceitaControlador.entidade.nome}" required="true" requiredMessage="Nome é obrigatório"/>
                         <p:message for="nome" showDetail="true" />
                     </p:column>
                 </p:row>
+                <p:row>
+                    <p:column><h:outputText value="Quantidade:"/></p:column>
+                    <p:column colspan="5">
+                        <p:spinner id="quantidade" value="#{jSFReceitaControlador.entidade.quantidade}" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column><h:outputText value="Receita:"/></p:column>
+                    <p:column colspan="5">
+                        <p:inputTextarea rows="10" cols="50" value="#{jSFReceitaControlador.entidade.receita}"
+                                         completeMethod="#{jSFReceitaControlador.completeArea}" queryDelay="500" minQueryLength="1"
+                                         />
+                    </p:column>
+
+                </p:row>
+
                 <f:facet name="footer">
                     <p:row>
                         <p:column colspan="6" style="text-align: right">
-                            <p:commandButton actionListener="#{jSFCevejariaControlador.salvar()}" action="lista" update="msgs" ajax="false" value="Salvar"/> 
+                            <p:commandButton actionListener="#{jSFReceitaControlador.salvar()}" action="lista" update="msgs" ajax="false" value="Salvar"/> 
                             <p:spacer width="20"/>
-                            <p:commandButton actionListener="#{jSFCevejariaControlador.cancelar()}" action="lista" update="msgs" ajax="false" value="Cancelar" immediate="true"/> 
+                            <p:commandButton actionListener="#{jSFReceitaControlador.cancelar()}" action="lista" update="msgs" ajax="false" value="Cancelar" immediate="true"/> 
                         </p:column>
                     </p:row>
                 </f:facet>
