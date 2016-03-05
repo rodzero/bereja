@@ -11,8 +11,10 @@ public class Usuario extends SuperEntidade  {
     private String nome;
     private String email;
     private String senha;
+    private String nivel;
 
     public Usuario() {
+        nivel="cervejeiro";
     }
 
     public String getNome() {

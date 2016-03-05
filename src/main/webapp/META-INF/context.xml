@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/bereja"/>
+<Context antiJARLocking="true" path="/bereja">
+    
+    <Realm className="org.apache.catalina.realm.JDBCRealm" debug="99"
+               driverName="com.mysql.jdbc.Driver" 
+               connectionURL="jdbc:mysql://localhost:3307/bereja?zeroDateTimeBehavior=convertToNull"
+               connectionName="root" 
+               connectionPassword="senha" 
+		
+               userRoleTable="Usuario"
+               userTable="Usuario"
+               userNameCol="email" 
+		
+               userCredCol="senha" 
+               
+               roleNameCol="nivel" />
+		
+    
+</Context>

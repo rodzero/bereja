@@ -22,4 +22,36 @@
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
+    
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Paginas do Usuario</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>cervejeiro</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-role>
+        <role-name>cervejeiro</role-name>
+    </security-role>
+
+
+   
+        <login-config>
+                <auth-method>BASIC</auth-method>
+                <realm-name>Controle de Usuarios</realm-name>
+        </login-config>
+
+<!--    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/login.jsp</form-login-page>
+            <form-error-page>/loginInvalido.jsp</form-error-page>
+        </form-login-config>
+    </login-config>-->
+
+
 </web-app>
