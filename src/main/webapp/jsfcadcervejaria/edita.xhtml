@@ -20,7 +20,7 @@
                     <p:column><h:outputText value="Id:"/></p:column>
                     <p:column colspan="5">
                         <p:inputText id="id" size="50"  value="#{jSFCevejariaControlador.entidade.id}" readonly="true" />
-                        
+
                     </p:column>
                 </p:row>
 
@@ -41,6 +41,26 @@
                     </p:row>
                 </f:facet>
             </p:panelGrid>
+
+
+<h:outputText value="Versões anteriores"/>
+            <p:dataTable value="#{jSFCevejariaControlador.listaRevisao}" emptyMessage="Nenhum registro corresponde ao filtro." var="obj">
+                <p:column headerText="Ip" sortBy="#{obj.auditoriaRevisao.ip}" >
+                    <h:outputText value="#{obj.auditoriaRevisao.ip}" />
+                </p:column>
+                <p:column headerText="Usuario" sortBy="#{obj.auditoriaRevisao.usuario}" >
+                    <h:outputText value="#{obj.auditoriaRevisao.usuario}" />
+                </p:column>
+                <p:column headerText="Quando" sortBy="#{obj.auditoriaRevisao.quando}" >
+                    <h:outputText value="#{obj.auditoriaRevisao.quando}" />
+                </p:column>
+                <p:column headerText="Nome" sortBy="#{obj.objeto.nome}" >
+                    <h:outputText value="#{obj.objeto.nome}" />
+                </p:column>
+
+
+            </p:dataTable>
+
         </h:form>
     </ui:define>
 </ui:composition>

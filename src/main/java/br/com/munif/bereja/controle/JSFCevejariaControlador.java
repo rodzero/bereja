@@ -3,11 +3,11 @@ package br.com.munif.bereja.controle;
 import br.com.munif.bereja.entidades.Cervejaria;
 import br.com.munif.bereja.negocio.CervejariaService;
 import br.com.munif.util.FacesUtil;
+import br.com.munif.util.RevisaoEObjeto;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
 
 /**
  *
@@ -15,14 +15,23 @@ import javax.faces.bean.SessionScoped;
  */
 @SessionScoped
 @ManagedBean
-public class JSFCevejariaControlador implements Serializable{
-    
+public class JSFCevejariaControlador implements Serializable {
+
     private final CervejariaService service;
-    
+
     private Cervejaria entidade;
     private List<Cervejaria> lista;
+    private List<RevisaoEObjeto> listaRevisao;
     private String filtro;
     private Boolean novo;
+
+    public List<RevisaoEObjeto> getListaRevisao() {
+        return listaRevisao;
+    }
+
+    public Boolean getNovo() {
+        return novo;
+    }
 
     public JSFCevejariaControlador() {
         this.service = new CervejariaService();
@@ -42,7 +51,8 @@ public class JSFCevejariaControlador implements Serializable{
 
     public void setEntidade(Cervejaria entidade) {
         this.entidade = entidade;
-        novo=false;
+        novo = false;
+        listaRevisao=service.listaVersoes(entidade.getId());
     }
 
     public List<Cervejaria> getLista() {
@@ -58,23 +68,23 @@ public class JSFCevejariaControlador implements Serializable{
 
     public void novo() {
         entidade = new Cervejaria();
-        novo=true;
+        novo = true;
     }
-    
+
     public void excluir(Cervejaria aRemover) {
         service.excluir(aRemover.getId());
         FacesUtil.addMessageInfo("Informação", "O objeto foi excluído.");
-        lista=null;
+        lista = null;
     }
 
     public void salvar() {
-         service.salvar(entidade);
+        service.salvar(entidade);
         if (novo) {
             FacesUtil.addMessageInfo("Informação", "O registro foi inserido.");
         } else {
             FacesUtil.addMessageInfo("Informação", "O registro foi alterado.");
         }
-        lista=null;
+        lista = null;
     }
 
     public void cancelar() {
@@ -87,5 +97,5 @@ public class JSFCevejariaControlador implements Serializable{
             lista = service.lista(); //TODO Filtrar a 
         }
     }
-    
+
 }

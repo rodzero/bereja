@@ -8,24 +8,29 @@ package br.com.munif.bereja.repositorio;
 import br.com.munif.bereja.entidades.Usuario;
 import br.com.munif.bereja.entidades.util.Persistencia;
 import br.com.munif.bereja.entidades.util.SuperEntidade;
+import br.com.munif.util.AuditoriaRevisao;
+import br.com.munif.util.RevisaoEObjeto;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
 
 /**
  *
  * @author munif
  */
 public class Repositorio<T extends SuperEntidade> {
-    
+
     protected Class<T> clazz;
-    
-    public Repositorio(Class<T> clazz){
+
+    public Repositorio(Class<T> clazz) {
         this.clazz = clazz;
     }
-    
-    public  List<T> consulta() {
+
+    public List<T> consulta() {
         EntityManager em = Persistencia.getInstancia().getEntityManager();
-        return em.createQuery("from "+clazz.getSimpleName()).getResultList();
+        return em.createQuery("from " + clazz.getSimpleName()).getResultList();
     }
 
     public T consulta(long id) {
@@ -46,4 +51,18 @@ public class Repositorio<T extends SuperEntidade> {
 
     }
 
+    public List<RevisaoEObjeto> listaVersoes(Long id) {
+        List<RevisaoEObjeto> aRetornar = new ArrayList<>();
+        AuditReader ar = AuditReaderFactory.get(Persistencia.getInstancia().getEntityManager());
+        List<Number> revisoes = ar.getRevisions(clazz, id);
+        for (Number n : revisoes) {
+            AuditoriaRevisao auditoriaRevisao = Persistencia.getInstancia().getEntityManager()
+                    .find(AuditoriaRevisao.class, n.longValue());
+            Object object = ar.find(clazz, id, n.longValue());
+            aRetornar.add(new RevisaoEObjeto(auditoriaRevisao, object));
+        }
+        return aRetornar;
+    }
+
 }
+

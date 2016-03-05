@@ -9,11 +9,13 @@ import br.com.munif.bereja.entidades.util.SuperEntidade;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import org.hibernate.envers.Audited;
 
 /**
  *
  * @author munif
  */
+@Audited
 @Entity
 public class Receita extends SuperEntidade {
 

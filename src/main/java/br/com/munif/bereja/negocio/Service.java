@@ -2,6 +2,7 @@ package br.com.munif.bereja.negocio;
 
 import br.com.munif.bereja.entidades.util.SuperEntidade;
 import br.com.munif.bereja.repositorio.Repositorio;
+import br.com.munif.util.RevisaoEObjeto;
 import java.util.List;
 
 public class Service<T extends SuperEntidade> {
@@ -40,6 +41,10 @@ public class Service<T extends SuperEntidade> {
 
     public T salvar(T obj) {
         return repositorio.salvar(obj);
+    }
+    
+    public List<RevisaoEObjeto> listaVersoes(Long id) {
+        return repositorio.listaVersoes(id);
     }
 
 }

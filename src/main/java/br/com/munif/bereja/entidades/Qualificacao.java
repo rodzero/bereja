@@ -11,11 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.envers.Audited;
 
 /**
  *
  * @author munif
  */
+@Audited
 @Entity
 public class Qualificacao extends SuperEntidade {
 

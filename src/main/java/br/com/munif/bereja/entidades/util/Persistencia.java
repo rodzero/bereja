@@ -5,6 +5,7 @@
  */
 package br.com.munif.bereja.entidades.util;
 
+import br.com.munif.bereja.entidades.Cervejaria;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import javax.persistence.EntityManager;
@@ -20,6 +21,13 @@ public class Persistencia {
     private static Persistencia instancia = new Persistencia();
 
     public ThreadLocal<EntityManager> tlem = new ThreadLocal<>();
+    
+    public ThreadLocal<String> ip=new ThreadLocal<>();
+    
+    public ThreadLocal<String> login=new ThreadLocal<>();
+    
+    public ThreadLocal<Cervejaria> cervejaria=new ThreadLocal<>();
+    
 
     public static Persistencia getInstancia() {
         return instancia;
