@@ -5,11 +5,14 @@
  */
 package br.com.munif.bereja.entidades.util;
 
+import br.com.munif.bereja.entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -32,6 +35,7 @@ public class FiltroEntityManager implements Filter {
     private FilterConfig filterConfig = null;
 
     public FiltroEntityManager() {
+        criaUsuarioPadrao();
     }
 
     /**
@@ -46,18 +50,18 @@ public class FiltroEntityManager implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 
         Throwable problem = null;
         long inicio = System.currentTimeMillis();
         EntityManager em = Persistencia.getInstancia().getEntityManager();
         Persistencia.getInstancia().ip.set(request.getRemoteAddr().toString());
         String login;
-        login=((HttpServletRequest)request).getUserPrincipal().getName();
+        login = ((HttpServletRequest) request).getUserPrincipal().getName();
         Persistencia.getInstancia().login.set(login);
-        
+
         //TODO descobrir a cervejaria do Usuario 
-        
-        
         try {
             em.getTransaction().begin();
             chain.doFilter(request, response);
@@ -174,6 +178,24 @@ public class FiltroEntityManager implements Filter {
 
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
+    }
+
+    private void criaUsuarioPadrao() {
+        System.out.println("Verificando Usuários");
+        EntityManager em = Persistencia.getInstancia().getEntityManager();
+        em.getTransaction().begin();
+        boolean temAdministrador = false;
+        Query q = em.createQuery("from Usuario u");
+        List<Usuario> usuarios = q.getResultList();
+        System.out.println("Usuários " + usuarios.size());
+        if (usuarios.isEmpty()) {
+            System.out.println("Base sem usuário, criando usuário padrão");
+            Usuario u = new Usuario();
+            u.setEmail("admin");
+            u.setSenha("123");
+            em.persist(u);
+        }
+        em.getTransaction().commit();
     }
 
 }

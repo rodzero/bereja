@@ -53,12 +53,12 @@ public class Repositorio<T extends SuperEntidade> {
 
     public List<RevisaoEObjeto> listaVersoes(Long id) {
         List<RevisaoEObjeto> aRetornar = new ArrayList<>();
-        AuditReader ar = AuditReaderFactory.get(Persistencia.getInstancia().getEntityManager());
-        List<Number> revisoes = ar.getRevisions(clazz, id);
+        AuditReader auditReader = AuditReaderFactory.get(Persistencia.getInstancia().getEntityManager());
+        List<Number> revisoes = auditReader.getRevisions(clazz, id);
         for (Number n : revisoes) {
             AuditoriaRevisao auditoriaRevisao = Persistencia.getInstancia().getEntityManager()
                     .find(AuditoriaRevisao.class, n.longValue());
-            Object object = ar.find(clazz, id, n.longValue());
+            Object object = auditReader.find(clazz, id, n.longValue());
             aRetornar.add(new RevisaoEObjeto(auditoriaRevisao, object));
         }
         return aRetornar;

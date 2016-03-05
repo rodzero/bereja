@@ -40,18 +40,18 @@
 
 
    
-        <login-config>
+<!--        <login-config>
                 <auth-method>BASIC</auth-method>
                 <realm-name>Controle de Usuarios</realm-name>
-        </login-config>
+        </login-config>-->
 
-<!--    <login-config>
+    <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
             <form-login-page>/login.jsp</form-login-page>
             <form-error-page>/loginInvalido.jsp</form-error-page>
         </form-login-config>
-    </login-config>-->
+    </login-config>
 
 
 </web-app>
