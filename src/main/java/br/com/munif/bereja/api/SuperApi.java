@@ -41,7 +41,7 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         mapper.setDateFormat(dateFormat);
-        mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        //mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
     }
     
     protected String[] getUrlParameters(HttpServletRequest request) {
