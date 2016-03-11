@@ -6,8 +6,8 @@
 package br.com.munif.bereja.repositorio;
 
 import br.com.munif.bereja.entidades.Usuario;
-import br.com.munif.bereja.entidades.util.Persistencia;
-import br.com.munif.bereja.entidades.util.SuperEntidade;
+import br.com.munif.util.Persistencia;
+import br.com.munif.util.SuperEntidade;
 import br.com.munif.util.AuditoriaRevisao;
 import br.com.munif.util.RevisaoEObjeto;
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package br.com.munif.util;
 
-import br.com.munif.bereja.entidades.util.Persistencia;
 import org.hibernate.envers.RevisionListener;
 
 public class OuvinteAuditoria implements RevisionListener {

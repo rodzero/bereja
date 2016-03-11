@@ -1,6 +1,6 @@
 package br.com.munif.bereja.entidades;
 
-import br.com.munif.bereja.entidades.util.SuperEntidade;
+import br.com.munif.util.SuperEntidade;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;

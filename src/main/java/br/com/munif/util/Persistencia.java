@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.munif.bereja.entidades.util;
+package br.com.munif.util;
 
 import br.com.munif.bereja.entidades.Cervejaria;
 import java.lang.reflect.ParameterizedType;
@@ -28,6 +28,12 @@ public class Persistencia {
     
     public ThreadLocal<Cervejaria> cervejaria=new ThreadLocal<>();
     
+    public void destroy() {
+        System.out.println("------------> Finalizando Persistencia");
+        emf.close();
+    }
+
+    
 
     public static Persistencia getInstancia() {
         return instancia;
@@ -35,6 +41,7 @@ public class Persistencia {
     private final EntityManagerFactory emf;
 
     private Persistencia() {
+        System.out.println("------------> Criando Persistencia");
         emf = Persistence.createEntityManagerFactory("berejaPU");
     }
 
@@ -79,5 +86,6 @@ public class Persistencia {
         Type superClass = clazz.getGenericSuperclass();
         return (Class<?>) ((ParameterizedType) superClass).getActualTypeArguments()[index];
     }
+
 
 }

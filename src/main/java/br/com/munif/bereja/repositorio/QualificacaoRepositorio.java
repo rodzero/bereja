@@ -6,7 +6,7 @@
 package br.com.munif.bereja.repositorio;
 
 import br.com.munif.bereja.entidades.Qualificacao;
-import br.com.munif.bereja.entidades.util.Persistencia;
+import br.com.munif.util.Persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 

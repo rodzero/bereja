@@ -1,6 +1,5 @@
 package br.com.munif.util;
 
-import br.com.munif.bereja.entidades.util.SuperEntidade;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;

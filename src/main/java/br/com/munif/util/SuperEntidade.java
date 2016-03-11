@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.munif.bereja.entidades.util;
+package br.com.munif.util;
 
 import br.com.munif.bereja.entidades.Cervejaria;
 import br.com.munif.bereja.entidades.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
@@ -81,6 +82,7 @@ public class SuperEntidade implements Serializable {
         return this.getClass().getSimpleName() + "{" + "id=" + id + ", cervejaria=" + cervejaria + '}';
     }
 
+    @JsonIgnore
     public Class getClazz() {
         return this.getClass();
     }

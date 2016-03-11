@@ -1,6 +1,6 @@
 package br.com.munif.bereja.negocio;
 
-import br.com.munif.bereja.entidades.util.SuperEntidade;
+import br.com.munif.util.SuperEntidade;
 import br.com.munif.bereja.repositorio.Repositorio;
 import br.com.munif.util.RevisaoEObjeto;
 import java.util.List;

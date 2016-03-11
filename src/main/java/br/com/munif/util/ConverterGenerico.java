@@ -1,6 +1,5 @@
 package br.com.munif.util;
 
-import br.com.munif.bereja.entidades.util.SuperEntidade;
 import br.com.munif.bereja.negocio.Service;
 import br.com.munif.bereja.repositorio.Repositorio;
 import java.io.Serializable;

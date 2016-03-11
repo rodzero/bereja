@@ -5,7 +5,7 @@
  */
 package br.com.munif.bereja.entidades;
 
-import br.com.munif.bereja.entidades.util.SuperEntidade;
+import br.com.munif.util.SuperEntidade;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;

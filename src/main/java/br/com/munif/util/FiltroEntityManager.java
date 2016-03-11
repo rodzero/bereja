@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.munif.bereja.entidades.util;
+package br.com.munif.util;
 
 import br.com.munif.bereja.entidades.Usuario;
 import java.io.IOException;
@@ -107,6 +107,8 @@ public class FiltroEntityManager implements Filter {
      * Destroy method for this filter
      */
     public void destroy() {
+        Persistencia.getInstancia().destroy();
+        
     }
 
     /**
