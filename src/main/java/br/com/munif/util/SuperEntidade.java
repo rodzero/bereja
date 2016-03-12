@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Random;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,6 +22,7 @@ import javax.persistence.MappedSuperclass;
  *
  * @author munif
  */
+@EntityListeners(MultiTenancyListener.class)
 @MappedSuperclass
 public class SuperEntidade implements Serializable {
 

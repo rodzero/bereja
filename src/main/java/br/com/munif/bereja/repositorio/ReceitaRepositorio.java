@@ -13,23 +13,25 @@ import java.util.List;
 import javax.persistence.Query;
 
 public class ReceitaRepositorio extends Repositorio<Receita> {
-
+    
     public ReceitaRepositorio() {
         super(Receita.class);
     }
-
+    
     @Override
     public List<Receita> consulta() {
         EntityManager em = Persistencia.getInstancia().getEntityManager();
-        return em.createQuery("from Receita receita order by receita.nome").getResultList();
+        Query q = em.createQuery(consultaBasica + " order by receita.nome");
+        setaParametroTenancy(q);
+        return q.getResultList();
     }
-
+    
     public List<Receita> filtra(String s) {
         EntityManager em = Persistencia.getInstancia().getEntityManager();
-        Query query = em.createQuery("from Receita receita where receita.nome like :filtro order by receita.nome");
+        Query query = em.createQuery(consultaBasica+ "and receita.nome like :filtro order by receita.nome");
+        setaParametroTenancy(query);
         query.setParameter("filtro", s + '%');
-        query.setMaxResults(4);
         return query.getResultList();
     }
-
+    
 }

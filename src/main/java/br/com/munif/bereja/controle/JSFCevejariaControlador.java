@@ -2,12 +2,14 @@ package br.com.munif.bereja.controle;
 
 import br.com.munif.bereja.entidades.Cervejaria;
 import br.com.munif.bereja.negocio.CervejariaService;
+import br.com.munif.util.ConverterGenerico;
 import br.com.munif.util.FacesUtil;
 import br.com.munif.util.RevisaoEObjeto;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.convert.Converter;
 
 /**
  *
@@ -52,7 +54,7 @@ public class JSFCevejariaControlador implements Serializable {
     public void setEntidade(Cervejaria entidade) {
         this.entidade = entidade;
         novo = false;
-        listaRevisao=service.listaVersoes(entidade.getId());
+        listaRevisao = service.listaVersoes(entidade.getId());
     }
 
     public List<Cervejaria> getLista() {
@@ -96,6 +98,10 @@ public class JSFCevejariaControlador implements Serializable {
         if (filtro != null) {
             lista = service.lista(); //TODO Filtrar a 
         }
+    }
+
+    public Converter getConverter() {
+        return new ConverterGenerico(service);
     }
 
 }

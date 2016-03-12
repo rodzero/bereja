@@ -60,8 +60,8 @@ public class FiltroEntityManager implements Filter {
         String login;
         login = ((HttpServletRequest) request).getUserPrincipal().getName();
         Persistencia.getInstancia().login.set(login);
+        Persistencia.getInstancia().descobreCervejaria();
 
-        //TODO descobrir a cervejaria do Usuario 
         try {
             em.getTransaction().begin();
             chain.doFilter(request, response);

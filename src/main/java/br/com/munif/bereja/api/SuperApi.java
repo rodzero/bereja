@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Super Api para exemplo
+ *
  * @author munif
  */
 public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
@@ -34,7 +35,7 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
     protected String url;
 
     public abstract Class<T> getClazz();
-    
+
     public SuperApi() {
         service = new Service<>(getClazz());
         mapper = new ObjectMapper();
@@ -43,7 +44,7 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
         mapper.setDateFormat(dateFormat);
         //mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
     }
-    
+
     protected String[] getUrlParameters(HttpServletRequest request) {
         url = this.getServletContext().getContextPath() + this.getClass().getAnnotation(WebServlet.class).urlPatterns()[0].replace("/*", "").trim();
         String paramters = request.getRequestURI().replaceFirst(url, "");
@@ -61,7 +62,13 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
         if (urlParameters.length == 0) {
             mapper.writeValue(response.getOutputStream(), service.lista());
         } else if (urlParameters.length == 1) {
-            mapper.writeValue(response.getOutputStream(), service.recuperar(Long.parseLong(urlParameters[0])));
+            T recuperado = service.recuperar(Long.parseLong(urlParameters[0]));
+            if (recuperado == null) {
+                response.setStatus(400);
+                mapper.writeValue(response.getOutputStream(), "Objeto inexistente");
+            } else {
+                mapper.writeValue(response.getOutputStream(), recuperado);
+            }
         } else {
             response.setStatus(400);
             mapper.writeValue(response.getOutputStream(), "Mais que um parâmetro no get");
@@ -73,8 +80,14 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
         response.setContentType("application/json;charset=UTF-8");
         String[] urlParameters = getUrlParameters(request);
         if (urlParameters.length == 1) {
-            mapper.writeValue(response.getOutputStream(), service.recuperar(Long.parseLong(urlParameters[0])));
-            service.excluir(Long.parseLong(urlParameters[0]));
+            T recuperado = service.recuperar(Long.parseLong(urlParameters[0]));
+            if (recuperado == null) {
+                response.setStatus(400);
+                mapper.writeValue(response.getOutputStream(), "Objeto inexistente");
+            } else {
+                mapper.writeValue(response.getOutputStream(), recuperado);
+                service.excluir(Long.parseLong(urlParameters[0]));
+            }
         } else {
             response.setStatus(400);
             mapper.writeValue(response.getOutputStream(), "Número de parâmetros inválido");

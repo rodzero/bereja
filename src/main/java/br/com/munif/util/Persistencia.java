@@ -6,11 +6,14 @@
 package br.com.munif.util;
 
 import br.com.munif.bereja.entidades.Cervejaria;
+import br.com.munif.bereja.entidades.Usuario;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 /**
  *
@@ -85,6 +88,20 @@ public class Persistencia {
     public static Class<?> inferGenericType(Class<?> clazz, int index) {
         Type superClass = clazz.getGenericSuperclass();
         return (Class<?>) ((ParameterizedType) superClass).getActualTypeArguments()[index];
+    }
+
+    public void descobreCervejaria() {
+        Cervejaria value=null;
+        //OLHAR LOGIN E DESCOBRIR A CERVEJARIA
+        EntityManager em=tlem.get();
+        Query q = em.createQuery("from Usuario usu where usu.email=:login");
+        q.setParameter("login", login.get());
+        List<Usuario> lista=q.getResultList();
+        if (lista.size()==1){
+            value=lista.get(0).getCervejaria();
+        }
+        cervejaria.set(value);
+        
     }
 
 
