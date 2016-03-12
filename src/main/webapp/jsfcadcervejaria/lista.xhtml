@@ -14,21 +14,21 @@
                 <br/>
                 <p:panel>
                     <h:outputText value="Filtro"/>
-                    <p:inputText value="#{jSFCevejariaControlador.filtro}"/>
-                    <p:commandButton actionListener="#{jSFCevejariaControlador.filtrar()}" value="Filtrar" ajax="false" />
-                    <p:commandButton actionListener="#{jSFCevejariaControlador.novo()}" value="Novo" ajax="false" action="edita" />
+                    <p:inputText value="#{cervejariaControladorJSF.filtro}"/>
+                    <p:commandButton actionListener="#{cervejariaControladorJSF.filtrar()}" value="Filtrar" ajax="false" />
+                    <p:commandButton actionListener="#{cervejariaControladorJSF.novo()}" value="Novo" ajax="false" action="edita" />
                     <br/>
                     Filtrando por Nome
                 </p:panel>
-                <p:dataTable value="#{jSFCevejariaControlador.lista}" emptyMessage="Nenhum registro corresponde ao filtro." var="obj">
+                <p:dataTable value="#{cervejariaControladorJSF.lista}" emptyMessage="Nenhum registro corresponde ao filtro." var="obj">
                     <p:column headerText="Nome" sortBy="#{obj.nome}" >
                         <h:outputText value="#{obj.nome}" />
                     </p:column>
                     <p:column headerText="Editar" style="width: 10%; text-align: center;">                                               
-                        <p:commandButton id="editarLink" action="edita" actionListener="#{jSFCevejariaControlador.setEntidade(obj)}" icon="ui-icon-search" ajax="false" /> 
+                        <p:commandButton id="editarLink" action="edita" actionListener="#{cervejariaControladorJSF.setEntidade(obj)}" icon="ui-icon-search" ajax="false" /> 
                     </p:column>
                     <p:column style="text-align: center"  headerText="Excluir" >
-                        <p:commandButton icon="ui-icon-trash" update="@form" actionListener="#{jSFCevejariaControlador.excluir(obj)}" 
+                        <p:commandButton icon="ui-icon-trash" update="@form" actionListener="#{cervejariaControladorJSF.excluir(obj)}" 
                                          onclick="if(!confirm('Deseja excluir este registro?')) return false;"/>
                     </p:column>
                 </p:dataTable>
