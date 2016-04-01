@@ -5,12 +5,10 @@
  */
 package br.com.munif.bereja.api;
 
-import br.com.munif.bereja.entidades.Cervejaria;
 import br.com.munif.util.SuperEntidade;
 import br.com.munif.bereja.negocio.Service;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
@@ -58,6 +56,7 @@ public abstract class SuperApi<T extends SuperEntidade> extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json;charset=UTF-8");
+
         String[] urlParameters = getUrlParameters(request);
         if (urlParameters.length == 0) {
             mapper.writeValue(response.getOutputStream(), service.lista());

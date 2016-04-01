@@ -21,13 +21,22 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     
     
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Paginas do Usuario</web-resource-name>
-            <url-pattern>/*</url-pattern>
+            <url-pattern>/cervejaria/*</url-pattern>
+            <url-pattern>/jsfcadcercejaria/*</url-pattern>
+            <url-pattern>/jsfcadproducao/*</url-pattern>
+            <url-pattern>/jsfcadreceita/*</url-pattern>
+            <url-pattern>/jsfcadusuario/*</url-pattern>
+            <url-pattern>/producao/*</url-pattern>
+            <url-pattern>/qualificacao/*</url-pattern>
+            <url-pattern>/receita/*</url-pattern>
+            <url-pattern>/usuario/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>cervejeiro</role-name>

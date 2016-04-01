@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.security.Principal;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -21,6 +22,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -52,15 +54,25 @@ public class FiltroEntityManager implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
+        //Access-Control-Allow-Headers:"Content-Type, token, Connection"
+        //Access-Control-Allow-Methods:"POST, GET, PUT, DELETE, OPTIONS,HEAD"
+        ((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", "*");
 
         Throwable problem = null;
         long inicio = System.currentTimeMillis();
         EntityManager em = Persistencia.getInstancia().getEntityManager();
         Persistencia.getInstancia().ip.set(request.getRemoteAddr().toString());
         String login;
-        login = ((HttpServletRequest) request).getUserPrincipal().getName();
-        Persistencia.getInstancia().login.set(login);
-        Persistencia.getInstancia().descobreCervejaria();
+        Principal userPrincipal = ((HttpServletRequest) request).getUserPrincipal();
+        if (userPrincipal != null) {
+            login = userPrincipal.getName();
+            Persistencia.getInstancia().login.set(login);
+            Persistencia.getInstancia().descobreCervejaria();
+
+        } else {
+            Persistencia.getInstancia().login.set("NAO_LOGADO");
+            Persistencia.getInstancia().descobreCervejaria();
+        }
 
         try {
             em.getTransaction().begin();
@@ -108,7 +120,7 @@ public class FiltroEntityManager implements Filter {
      */
     public void destroy() {
         Persistencia.getInstancia().destroy();
-        
+
     }
 
     /**
