@@ -54,8 +54,8 @@ public class FiltroEntityManager implements Filter {
             throws IOException, ServletException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        //Access-Control-Allow-Headers:"Content-Type, token, Connection"
-        //Access-Control-Allow-Methods:"POST, GET, PUT, DELETE, OPTIONS,HEAD"
+        ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-Type, token, Connection");//Access-Control-Allow-Headers:"Content-Type, token, Connection"
+        ((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS,HEAD");//Access-Control-Allow-Methods:"POST, GET, PUT, DELETE, OPTIONS,HEAD"
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", "*");
 
         Throwable problem = null;
