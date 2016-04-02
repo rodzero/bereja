@@ -24,19 +24,17 @@ public class Persistencia {
     private static Persistencia instancia = new Persistencia();
 
     public ThreadLocal<EntityManager> tlem = new ThreadLocal<>();
-    
-    public ThreadLocal<String> ip=new ThreadLocal<>();
-    
-    public ThreadLocal<String> login=new ThreadLocal<>();
-    
-    public ThreadLocal<Cervejaria> cervejaria=new ThreadLocal<>();
-    
+
+    public ThreadLocal<String> ip = new ThreadLocal<>();
+
+    public ThreadLocal<String> login = new ThreadLocal<>();
+
+    public ThreadLocal<Cervejaria> cervejaria = new ThreadLocal<>();
+
     public void destroy() {
         System.out.println("------------> Finalizando Persistencia");
         emf.close();
     }
-
-    
 
     public static Persistencia getInstancia() {
         return instancia;
@@ -91,18 +89,29 @@ public class Persistencia {
     }
 
     public void descobreCervejaria() {
-        Cervejaria value=null;
+        Cervejaria value = null;
         //OLHAR LOGIN E DESCOBRIR A CERVEJARIA
-        EntityManager em=tlem.get();
+        EntityManager em = tlem.get();
         Query q = em.createQuery("from Usuario usu where usu.email=:login");
         q.setParameter("login", login.get());
-        List<Usuario> lista=q.getResultList();
-        if (lista.size()==1){
-            value=lista.get(0).getCervejaria();
+        List<Usuario> lista = q.getResultList();
+        if (lista.size() == 1) {
+            value = lista.get(0).getCervejaria();
         }
         cervejaria.set(value);
-        
+
     }
 
+    void descobreCervejaria(long idCervejaria) {
+        try {
+            Cervejaria value = null;
+            EntityManager em = tlem.get();
+            value=em.find(Cervejaria.class, idCervejaria);
+            cervejaria.set(value);
+        } catch (Exception ex) {
+            
+
+        }
+    }
 
 }

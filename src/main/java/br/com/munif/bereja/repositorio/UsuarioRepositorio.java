@@ -35,4 +35,17 @@ public class UsuarioRepositorio extends Repositorio<Usuario> {
         return query.getResultList();
     }
 
+    public Usuario recuperaPorLoginESenha(String usuario, String senha) {
+        EntityManager em = Persistencia.getInstancia().getEntityManager();
+        Query query = em.createQuery("from Usuario usuario where usuario.email=:email and usuario.senha=:senha");
+        query.setParameter("email", usuario);
+        query.setParameter("senha", senha);
+        query.setMaxResults(1);
+        List<Usuario> resultList = query.getResultList();
+        if (resultList.size() == 1) {
+            return resultList.get(0);
+        }
+        return null;
+    }
+
 }

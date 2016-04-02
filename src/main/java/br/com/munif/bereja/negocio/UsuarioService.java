@@ -14,21 +14,23 @@ import java.util.List;
  *
  * @author munif
  */
-public class UsuarioService extends Service<Usuario>{
+public class UsuarioService extends Service<Usuario> {
 
     public UsuarioService() {
         super(Usuario.class);
     }
- 
+
     @Override
     protected Repositorio<Usuario> getRepositorio() {
         return new UsuarioRepositorio();
     }
-    
-    public List<Usuario> filtra(String s){
-        return ((UsuarioRepositorio)repositorio).filtra(s);
+
+    public List<Usuario> filtra(String s) {
+        return ((UsuarioRepositorio) repositorio).filtra(s);
     }
-    
-    
-    
+
+    public Usuario recuperaPorLoginESenha(String usuario, String senha) {
+        return ((UsuarioRepositorio) repositorio).recuperaPorLoginESenha(usuario, senha);
+    }
+
 }

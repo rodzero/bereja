@@ -5,6 +5,7 @@
  */
 package br.com.munif.util;
 
+import br.com.munif.bereja.entidades.Token;
 import br.com.munif.bereja.entidades.Usuario;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -57,6 +58,7 @@ public class FiltroEntityManager implements Filter {
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Headers", "Content-Type, token, Connection");//Access-Control-Allow-Headers:"Content-Type, token, Connection"
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS,HEAD");//Access-Control-Allow-Methods:"POST, GET, PUT, DELETE, OPTIONS,HEAD"
         ((HttpServletResponse) response).setHeader("Access-Control-Allow-Origin", "*");
+        HttpServletRequest hsr = (HttpServletRequest) request;
 
         Throwable problem = null;
         long inicio = System.currentTimeMillis();
@@ -64,19 +66,33 @@ public class FiltroEntityManager implements Filter {
         Persistencia.getInstancia().ip.set(request.getRemoteAddr().toString());
         String login;
         Principal userPrincipal = ((HttpServletRequest) request).getUserPrincipal();
+        boolean faz = true;
         if (userPrincipal != null) {
             login = userPrincipal.getName();
             Persistencia.getInstancia().login.set(login);
             Persistencia.getInstancia().descobreCervejaria();
 
         } else {
-            Persistencia.getInstancia().login.set("NAO_LOGADO");
-            Persistencia.getInstancia().descobreCervejaria();
+            String tokenValue = ((HttpServletRequest) request).getHeader("token");
+            Token token = Token.getLista().get(tokenValue);
+            if (token == null || System.currentTimeMillis() > token.getValidade()) {
+
+                if ((hsr.getRequestURI().contains("api"))) {
+                    faz = false;
+                }
+            } else {
+                Persistencia.getInstancia().descobreCervejaria(token.getIdCervejaria());
+            }
         }
 
         try {
             em.getTransaction().begin();
-            chain.doFilter(request, response);
+            if (faz) {
+                chain.doFilter(request, response);
+            } else {
+                ((HttpServletResponse) response).setStatus(403);
+                response.getOutputStream().write("Proibido".getBytes());
+            }
             em.getTransaction().commit();
         } catch (Throwable t) {
             em.getTransaction().rollback();
@@ -85,7 +101,7 @@ public class FiltroEntityManager implements Filter {
         }
         Persistencia.getInstancia().destroyEntityManager();
         long tempo = System.currentTimeMillis() - inicio;
-        HttpServletRequest hsr = (HttpServletRequest) request;
+
         System.out.println("-----> TEMPO " + tempo + "ms para " + hsr.getRequestURI());
 
         if (problem != null) {

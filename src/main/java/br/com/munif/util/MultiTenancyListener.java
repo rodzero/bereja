@@ -8,6 +8,7 @@ public class MultiTenancyListener {
     @PrePersist
     public void prePersist(SuperEntidade entidade) {
         Cervejaria cervejariaDousuario = Persistencia.getInstancia().cervejaria.get();
+        System.out.println("------->"+cervejariaDousuario);
         if (cervejariaDousuario != null) {
             entidade.setCervejaria(cervejariaDousuario);
         }

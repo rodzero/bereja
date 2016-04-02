@@ -25,4 +25,9 @@ public class Cervejaria extends SuperEntidade {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return "Cervejaria{" + "nome=" + nome + '}';
+    }
+
 }
