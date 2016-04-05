@@ -76,10 +76,7 @@ public class FiltroEntityManager implements Filter {
             String tokenValue = ((HttpServletRequest) request).getHeader("token");
             Token token = Token.getLista().get(tokenValue);
             if (token == null || System.currentTimeMillis() > token.getValidade()) {
-
-                if ((hsr.getRequestURI().contains("api"))) {
-                    faz = false;
-                }
+                
             } else {
                 Persistencia.getInstancia().descobreCervejaria(token.getIdCervejaria());
             }

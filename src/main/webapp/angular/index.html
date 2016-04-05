@@ -1,73 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>ESPWEB</title>
-  <link rel="stylesheet" href="./bootstrap.min.css">
-</head>
-<script>
+    <head>
+        <meta charset="UTF-8">
+        <title>ESPWEB</title>
+        <link rel="stylesheet" href="./bootstrap.min.css">
+    </head>
+    <body>
+        <main ng-app="app.example">
+            <div ng-controller="Controller">
+                <div id="login" ng-hide="scope.token.$valid">
+                    <form id="formLogin" ng-submit="logar(login,senha)" name="LoginForm" class="col-md-4 col-md-offset-4">
+                        <div class="form-group">
+                            <label for="login">Login</label>
+                            <input id="login" type="text" ng-model="login" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="senha">Senha</label>
+                            <input id="senha" type="text" ng-model="senha" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary text-center" ng-disabled="!LoginForm.$valid">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="principal" ng-show="$scope.token">
+                    <div class="col-md-6" style="margin-top: 5%;" ng-show="true">
+                        <label>
+                            Listagem
+                        </label>
+                        <div class="form-group">
+                            <input type="text" ng-model="nome" class="form-control">
+                        </div>
+                        <ul class="list-group">
+                            <li ng-repeat="cervejaria in cervejarias| filter:nome" class="list-group-item">
+                                {{ cervejaria.id}} - {{ cervejaria.nome}}
+                                <button type="button" ng-click="editarCervejaria(cervejaria)" class="btn btn-default pull-right">
+                                    Editar
+                                </button>
+                                <button type="button" ng-click="apagarCervejaria(cervejaria.id)" class="btn btn-danger pull-right">
+                                    Deletar
+                                </button>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6" style="margin-top:5%;">
+                        <form ng-submit="saveOrUpdate(cervejaria)" name="CervejariaForm">
+                            <div class="form-group">
+                                <label for="nome">Nome</label>
+                                <input  type="text"
+                                        id="nome"
+                                        name="Nome"
+                                        class="form-control"
+                                        ng-model="cervejaria.nome"
+                                        required>
+                            </div>
+                            <div class="form-group">
 
-</script>
-<body>
-  <main ng-app="app.example">
-    <div ng-controller="Controller">
-        <div class="col-md-6" style="margin-top: 5%;" ng-show="true">
-        <label>
-          Listagem
-        </label>
-        <div class="form-group">
-          <input type="text" ng-model="nome" class="form-control">
-        </div>
-        <ul class="list-group">
-          <li ng-repeat="cervejaria in cervejarias | filter:nome" class="list-group-item">
-          {{ cervejaria.id}} - {{ cervejaria.nome }}
-          <button type="button" ng-click="editarCervejaria(cervejaria)" class="btn btn-default pull-right">
-            Editar
-          </button>
-          <button type="button" ng-click="apagarCervejaria(cervejaria.id)" class="btn btn-danger pull-right">
-            Deletar
-          </button>
-          <div class="clearfix"></div>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-6" style="margin-top:5%;">
-        <form ng-submit="saveOrUpdate(cervejaria)" name="CervejariaForm">
-          <div class="form-group">
-            <label for="nome">Nome</label>
-            <input  type="text"
-                    id="nome"
-                    name="Nome"
-                    class="form-control"
-                    ng-model="cervejaria.nome"
-                    required>
-          </div>
-          <div class="form-group">
+                                <select ng-model="usuario.cervejaria" class="form-control">
+                                    <option ng-repeat="cervejaria in cervejarias" value="cervejaria">
+                                        {{cervejaria.nome}}
+                                    </option>
+                                </select>
+                            </div>
 
-            <select ng-model="usuario.cervejaria" class="form-control">
-              <option ng-repeat="cervejaria in cervejarias" value="cervejaria">
-                {{cervejaria.nome}}
-              </option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <button type="submit" class="btn btn-primary"
-                    ng-disabled="!CervejariaForm.$valid">
-              {{ cervejaria.id ? 'Editar' : 'Salvar' }}
-            </button>
-          </div>
-        </form>
-      </div>
-
-
-
-    </div>
-  </main>
-  <script src="./angular.min.js"></script>
-  <script src="./module.js"></script>
-  <script src="./factory.js"></script>
-  <script src="./controller.js"></script>
-  </main>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"
+                                        ng-disabled="!CervejariaForm.$valid">
+                                    {{ cervejaria.id ? 'Editar' : 'Salvar' }}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="./angular.min.js"></script>
+        <script src="./module.js"></script>
+        <script src="./factory.js"></script>
+        <script src="./controller.js"></script>
+    </main>
 </body>
 </html>
