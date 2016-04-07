@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "CriaToken", urlPatterns = {"/token/*"})
+@WebServlet(name = "CriaToken", urlPatterns = {"/api/token/*"})
 public class CriaToken extends HttpServlet {
 
     private UsuarioService usuarioService = new UsuarioService();
@@ -30,7 +30,7 @@ public class CriaToken extends HttpServlet {
         Usuario usuario = usuarioService.recuperaPorLoginESenha(usuarioSenha.usuario, usuarioSenha.senha);
         if (usuario != null) {
             Token token = new Token(usuario.getCervejaria().getId());
-            mapper.writeValue(response.getOutputStream(), token);
+            mapper.writeValue(response.getOutputStream(), token);            
         } else {
             response.setStatus(401);
             mapper.writeValue(response.getOutputStream(), "Não autorizado");

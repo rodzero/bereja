@@ -4,12 +4,12 @@
         <meta charset="UTF-8">
         <title>ESPWEB</title>
         <link rel="stylesheet" href="./bootstrap.min.css">
-    </head>
+    </head>    
     <body>
         <main ng-app="app.example">
             <div ng-controller="Controller">
                 <div id="login" ng-hide="scope.token.$valid">
-                    <form id="formLogin" ng-submit="logar(login,senha)" name="LoginForm" class="col-md-4 col-md-offset-4">
+                    <form id="formLogin" ng-submit="buscaToken(login, senha)" name="LoginForm" class="col-md-4 col-md-offset-4">
                         <div class="form-group">
                             <label for="login">Login</label>
                             <input id="login" type="text" ng-model="login" class="form-control">
@@ -23,6 +23,7 @@
                         </div>
                     </form>
                 </div>
+
                 <div id="principal" ng-show="$scope.token">
                     <div class="col-md-6" style="margin-top: 5%;" ng-show="true">
                         <label>
@@ -72,6 +73,9 @@
                             </div>
                         </form>
                     </div>
+
+
+
                 </div>
             </div>
         </main>
