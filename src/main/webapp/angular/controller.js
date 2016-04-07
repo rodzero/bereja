@@ -1,6 +1,6 @@
 angular.module('app.example')
   .controller('Controller', function($scope, CervejariaFactory, $timeout){
-  $scope.token = window.sessionStorage.getItem('token');
+  $scope.token = window.localStorage.getItem('token');
   
   $scope.login = '';
   $scope.senha = '';
@@ -51,9 +51,9 @@ angular.module('app.example')
               .logar(login, senha)
               .then(function (response) {
                   console.log(response);
-                  if(response !== 'Não autorizado') {
-                    $scope.token = response;
-                    window.sessionStorage.setItem('token',$scope.token);
+                  if(response !== 'Proibido') {
+                    $scope.token = response.data.valor;
+                    window.localStorage.setItem('token',$scope.token);
                     console.log($scope.token);
                     $scope.buscarDados();  
                   }                                  

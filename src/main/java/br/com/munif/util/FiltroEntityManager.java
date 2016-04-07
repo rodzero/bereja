@@ -77,7 +77,7 @@ public class FiltroEntityManager implements Filter {
             Token token = Token.getLista().get(tokenValue);
             if (token == null || System.currentTimeMillis() > token.getValidade()) {
 
-                if ((hsr.getRequestURI().contains("api")) && (!hsr.getRequestURI().contains("api/token"))) {
+                if (hsr.getRequestURI().contains("api") && !hsr.getRequestURI().contains("api/token")) {
                     faz = false;
                 }
             } else {

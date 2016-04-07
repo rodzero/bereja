@@ -8,7 +8,7 @@
     <body>
         <main ng-app="app.example">
             <div ng-controller="Controller">
-                <div id="login" ng-hide="scope.token.$valid">
+                <div id="login" ng-hide="token">
                     <form id="formLogin" ng-submit="buscaToken(login, senha)" name="LoginForm" class="col-md-4 col-md-offset-4">
                         <div class="form-group">
                             <label for="login">Login</label>
@@ -24,7 +24,7 @@
                     </form>
                 </div>
 
-                <div id="principal" ng-show="$scope.token">
+                <div id="principal" ng-show="token">
                     <div class="col-md-6" style="margin-top: 5%;" ng-show="true">
                         <label>
                             Listagem
